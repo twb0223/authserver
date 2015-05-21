@@ -1,0 +1,115 @@
+﻿@charset "utf-8";
+
+/*重置*/
+body{ margin:0 auto; background-color:#ffffff;}
+div,img{ margin:0; padding:0;}
+*{ font-size:12px; }
+a{ text-decoration:none;}
+
+.container{ margin:0 auto; width:1280px; height:800px; background-color:white; }
+.nav{ width:1280px; height:63px; position:relative;}
+.topbackground{ width:1280px;}
+.topinformationbox{ width:1280px; height:26px; background-image:url(../images/topinformation.png)}
+.topinformationbox a{ font-size:10px; color:#11395a; line-height:26px; margin-left:100px;}
+.topinformation{ width:1280px;}
+.nav .toptext a{ position:absolute; left:87px; top:20px; font-family:浪漫雅圆; line-height:30px; color:white; font-weight:bold; font-size:24px;}
+.nav .abox{ position:absolute; top:42px; right:31px; width:34%;}
+.nav a{ font-size:12px; color:#a5d2f1; position:relative; line-height:20px;}
+.nav .abox .a01{ background-image:url(../images/backhome.png);padding-left:20px; background-repeat:no-repeat;background-position:left top; margin-right:8px; }
+.nav .abox .a02{ background-image:url(../images/systemsetting.png);background-repeat:no-repeat; padding-left:20px; background-position:left top; margin-right:17px;}
+.nav .abox .a03{ background-image:url(../images/rolechanging.png);background-repeat:no-repeat; padding-left:20px; background-position:left top; margin-right:18px;}
+.nav .abox .a04{ background-image:url(../images/logoff.png);background-repeat:no-repeat; padding-left:20px; background-position:left top; margin-right:18px;}
+.nav .abox .a05{ background-image:url(../images/systemsetting.png);background-repeat:no-repeat; padding-left:20px; background-position:left top;}
+
+
+.coloumbg{ width:100%; height:800px;}
+.coloumpicture{ width:100%;}
+.coloumbg .a01{ position:relative; top:42px; left:121px;}
+.coloumbg .a02{ position:relative; top:42px; left:801px;}
+.coloumbg .a03{ position:relative; top:477px; left:-220px;}
+.coloumbg .a04{ position:relative; top:477px; left:460px;}
+
+.linksetting01{ position:relative; width:437px; height:238px; top:87px; left:370px;}
+.linksetting01 a{ color:black; font-size:18px;}
+.linksetting01 .a01{ margin-top:16px; display:block;}
+.linksetting01 .a02{ margin-top:80px; display:block;}
+.linksetting01 .a03{ margin-top:78px; display:block;}
+
+.block{ position:relative; top:-660px; left:1231px;}
+
+.linksetting03{ position:relative; width:437px; height:238px; top:220px; left:370px;}
+.linksetting03 a{ color:black; font-size:18px;}
+.linksetting03 .a01{ margin-top:16px; display:block;}
+.linksetting03 .a02{ margin-top:80px; display:block;}
+.linksetting03 .a03{ margin-top:78px; display:block;}
+
+.linksetting04{ position:relative; width:437px; height:238px; top:-235px; left:1231px;}
+.linksetting04 a{ color:black; font-size:18px;}
+.linksetting04 .a01{ margin-top:16px; display:block;}
+.linksetting04 .a02{ margin-top:80px; display:block;}
+.linksetting04 .a03{ margin-top:78px; display:block;}
+
+@media (max-width:1440px){   
+	.container{ width:100%;}
+	.nav{ width:100%;}
+	.coloumbg{ width:100%;}
+	.topinformation{ width:100%;}
+	.column{ width:47%;}
+
+}
+
+
+
+@media (max-width:1280px){
+	.container{ width:100%;}
+	.coloumbg{ width:100%;}
+	.topinformation{ width:100%;}
+	.coloumpicture{ width:100%;}
+	.column{ width:47%;}
+	.topbackground{ height:63px;}
+	
+}
+
+@media ( max-width:1266px){
+	.container{ width:100%;}
+	.coloumbg{ width:100%;}
+	.topinformation{ width:100%;}
+	.coloumpicture{ width:100%;}
+	.column{ width:47%;}
+	.abox{ display:none;}
+}
+
+.coloumbg{ position: relative; width:1280px;}
+.Box01{position: absolute;top: 22px;left:0px;width: 640px; overflow:hidden;}
+.Box01 img{ float:left;}
+.Linebox01{ float:left; margin-top:33px; margin-left:6px; width:500px; height:225px;}
+.Linebox01 a{ font-size:15px; margin-left:20px; margin-top:20px; color:black; display:block;}
+
+
+.Box02{ position: absolute; top:22px; left:640px; width:640px; height:200px;}
+.Box02 img{ float:left;}
+.Linebox02{ float:left; margin-top:33px; margin-left:4px; width:510px; height:225px;}
+.Linebox02 table{ margin-top:20px;}
+.Linebox02 table td{ font-size:15px; width:213px; text-align:center;}
+
+.line01{ margin-top:40px;}
+.line01 a{ margin-right:60px; font-size:20px; color:black; margin-top:10px;}
+.line02 a{ margin-right:60px; font-size:20px; color:black; margin-top:10px;}
+.line03 a{ margin-right:60px; font-size:20px; color:black; margin-top:10px;}
+.line04 a{ margin-right:60px; font-size:20px; color:black; margin-top:10px;}
+.line05 a{ margin-right:60px; font-size:20px; color:black; margin-top:10px;}
+.line02, .line03, .line04, .line05{ margin-top:10px;}
+
+
+.Box03{ position: absolute; top:310px; left:0px; width:640px; height:200px;}
+.Box03 img{ float:left; margin-top:0px; margin-left:0px;}
+.Linebox03{ float:left; margin-top:33px; margin-left:6px; width:500px;height:225px;}
+.Linebox03 a{ font-size:15px; margin-left:20px; margin-top:20px; color:black; display:block;}
+
+
+.Box04{ position: absolute; top:310px; left:640px; width:640px; height:300px;}
+.Box04 img{ float:left;}
+.Linebox04{ float:left; margin-top:33px; margin-left:6px; width:510px;height:225px;}
+.Linebox04 a{ font-size:15px; margin-left:20px; margin-top:20px; color:black; display:block;}
+
+.Linebox01,.Linebox02,.Linebox03,.Linebox04{ background-color:#d4e4ee;}

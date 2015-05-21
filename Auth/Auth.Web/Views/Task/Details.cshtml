@@ -1,0 +1,69 @@
+﻿@model Auth.Model.UpdateTask
+@using Auth.Web
+@{
+    ViewBag.Title = "明细";
+    Utils fun = new Utils();
+    var str = "";
+}
+
+<div class="topinformationbox">
+    <a>计划明细</a>
+
+</div>
+<div style="height: 5px;">
+</div>
+
+
+<div align="center">
+    <table class="tb tbbordertopleft" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td style="width:10%">@Html.LabelFor(model => model.TaskName)</td>
+            <td>
+                @Html.DisplayFor(model => model.TaskName)
+            </td>
+
+            <td style="width:10%">组件_版本号</td>
+            <td>
+                @Html.DisplayFor(model => model.VersionNo)
+
+            </td>
+        </tr>
+        <tr>
+            <td >@Html.LabelFor(model => model.UpdateType)</td>
+            <td>
+                <div class="select_border" style="width:100%;text-align:left">
+                    @Html.DropDownListFor(model => model.UpdateType, fun.Selectlists("utp"), "请选择..", new { disabled = "disabled", Style = "width:100%" })
+                </div>
+            </td>
+            <td>@Html.LabelFor(model => model.UpdateScope)</td>
+            <td>
+                <div class="select_border" style="width:100%;text-align:left">
+                    @Html.DropDownListFor(model => model.UpdateScope, fun.Selectlists("scop"), "请选择..", new { disabled = "disabled", Style = "width:100%" })
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.UpdateTime)</td>
+            <td>
+                @if (this.Model.IsExecNow == 1)
+                {
+                    str = "立即更新";
+                }
+                else
+                {
+                    str = this.Model.UpdateTime.ToString();
+                }
+                @str
+            </td>
+            <td>@Html.LabelFor(model => model.IDList)</td>
+            <td style="text-align:left">
+                @Html.DisplayFor(model => model.IDList)
+            </td>
+        </tr>
+    </table>
+
+    <p>
+        @*@Html.ActionLink("Edit", "Edit", new { id=Model.TaskID }) |*@
+        @Html.ActionLink("返回列表", "Index")
+    </p>
+</div>

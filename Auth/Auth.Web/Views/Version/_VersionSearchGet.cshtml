@@ -1,0 +1,106 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model Webdiyer.WebControls.Mvc.PagedList<Auth.Model.VersionInfo>
+@using Auth.Web
+@{
+    var str = "";
+    Utils fun = new Utils();
+}
+
+
+<table class="tb tbbordertopleft list" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+        <tr>
+            <td class="label" width="5%">
+                操作
+            </td>
+            <td class="oper" align="left">
+                <span id="btn_Add" class="oper_add">
+                    @Html.ActionLink("添加", "Create")
+                </span>
+
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="height: 5px;">
+</div>
+
+<table class="tb tbbordertopleft list" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VersionNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsPublish)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientType)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ClientTypeName)
+        </th>
+        <th style="width:10%">操作</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+         <tr style="text-align:center">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VersionNo)
+            </td>
+            <td>
+                @if (item.IsPublish == 0)
+                {
+                    str = "否";
+
+                }
+                else
+                {
+                    str = "是";
+                }
+                @str
+            </td>
+            <td>
+                @fun.GetName("ctype", item.ClientType)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientTypeName)
+            </td>
+            <td>
+                @Html.ActionLink("明细", "Details", new { id = item.VersionID })
+                @if (item.IsPublish == 0)
+                {
+                    @Html.ActionLink("删除 ", "Delete", new { id = item.VersionID }, new { onclick = "return (confirm('确定要删除吗？'))" })
+                    @Html.ActionLink("发布", "Publish", new { id = item.VersionID })                                       
+                }
+                else
+                {
+                    @Html.ActionLink("取消", "PublishCancle", new { id = item.VersionID })
+                }
+
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div style="padding-top:5px; width:100%; text-align:left">
+    <div style="float:left;width:50%">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
+    @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ShowPageIndexBox = true, PageIndexBoxType = PageIndexBoxType.DropDownList, ShowGoButton = false }, new MvcAjaxOptions { UpdateTargetId = "Version", DataFormId = "searchForm" }, new { style = "float:right" })
+</div>
+
+
+
+
+

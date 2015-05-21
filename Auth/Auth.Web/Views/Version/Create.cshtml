@@ -1,0 +1,151 @@
+﻿@model Auth.Model.VersionInfo
+@using Auth.Web
+@{
+    ViewBag.Title = "添加";
+    Utils fun = new Utils();
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#VersionNo").attr("readOnly", "readOnly");
+        $("#ClientTypeName").attr("readOnly", "readOnly");
+
+        $("#Name").css("width", "99%").css("height", "22px");
+        $("#VersionNo").css("width", "99%").css("height", "22px");
+        $("#Description").css("width", "99%").css("height", "22px");
+        $("#ClientTypeName").css("width", "99%").css("height", "22px");
+
+        $("#btnsubmit").bind("click", function () {
+
+            if ($("#ClientType").val() == "") {
+                alert("请选择终端类型");
+                return;
+            }
+
+            var filepath = $("#pfile").val();
+            if (filepath == "") {
+                $("#tipmsg").text("文件路径不能为空");
+                return;
+            }
+            //if ($("#ClientTypeName").val() == "") {
+            //    alert("请选择终端组件");
+            //    return;
+            //}
+
+            $("#subForm").submit();
+            $("#btnsubmit").attr("disabled", "false");
+        })
+
+        $("#pfile").live("change", function () {
+            var filepath = $("#pfile").val();
+            var myArray = new Array()
+            myArray = filepath.split("\\");
+            var filename = myArray[myArray.length - 1];//取文件名
+            if ((filename.indexOf(".apk") < 0 && filename.indexOf(".zip") < 0) || (filename.indexOf("M_V") < 0 && filename.indexOf("P_V") < 0)) {
+
+                $("#tipmsg").text(filename + "不是有效的版本文件！");
+                $("#pfile").val("");
+                $("#VersionNo").val("");
+                $("#ClientTypeName").val("");
+
+            }
+            else {
+
+                $("#VersionNo").val(filename.replace("M_V", "").replace("P_V", "").replace(".apk", "").replace(".zip", ""));
+
+                $("#tipmsg").text("文件命名例如:M_V4.1.1.1.apk,P_V4.1.1.1.zip");
+
+                if (filename.indexOf("M") >= 0) {
+                    $("#ClientTypeName").val("M");
+                    return;
+                }
+                if (filename.indexOf("P") >= 0) {
+                    $("#ClientTypeName").val("P");
+                    return;
+                }
+                
+            }
+        })
+    });
+</script>
+
+<div class="topinformationbox">
+    <a>版本添加</a>
+</div>
+<div style="height: 5px;">
+</div>
+<div align="center">
+    @using (Html.BeginForm("Create", "Version", FormMethod.Post, new { enctype = "multipart/form-data", id = "subForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        <table class="tb tbbordertopleft list" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="width:10%">@Html.LabelFor(model => model.Name)</td>
+                <td>
+                    @Html.EditorFor(model => model.Name)
+
+
+                </td>
+
+                <td style="width:10%">@Html.LabelFor(model => model.VersionNo)</td>
+                <td>
+                    @Html.EditorFor(model => model.VersionNo)
+
+
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.ClientType)</td>
+                <td>
+                    <div class="select_border" style="width: 99%; text-align: left">
+                        @Html.DropDownListFor(model => model.ClientType, fun.Selectlists("ctype"), "请选择..", new { Style = "width:100%" })
+
+                    </div>
+
+
+
+                </td>
+                <td>@Html.LabelFor(model => model.ClientTypeName)</td>
+                <td >
+
+                    @Html.EditorFor(model => model.ClientTypeName)
+
+                    @*<div class="select_border" style="width: 99%; text-align:left">
+
+
+                        @Html.DropDownListFor(model => model.ClientTypeName, fun.Selectlists("typeName"), "请选择..", new { Style = "width:100%" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ClientTypeName)*@
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Description)</td>
+                <td>
+
+                    @Html.EditorFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </td>
+
+                <td>@Html.LabelFor(model => model.FielPath)</td>
+                <td style="text-align:left">
+                    <input type="file" name="pfile" id="pfile" style="width:50%;height:22px;" />
+                    <span id="tipmsg">文件命名例如:M_V4.1.1.1.apk,P_V4.1.1.1.apk</span>
+                    @*@Html.ValidationMessageFor(model => model.FielPath)*@
+
+                </td>
+            </tr>
+        </table>
+        <div style="height: 5px;">
+        </div>
+        <div style=" text-align:center">
+            <input id="btnsubmit" type="button" value="添加" style="width:65px; height:25px" />
+            <a href="/Version/Index">返回列表</a>
+        </div>
+    }
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,62 @@
+﻿@model Auth.Model.LogInfo
+
+@{
+    ViewBag.Title = "日志明细";
+}
+
+<div class="topinformationbox">
+    <a>日志明细</a>
+
+</div>
+
+<div style="height: 5px;">
+</div>
+
+
+<div align="center">
+    <table class="tb tbbordertopleft" width="100%" border="0" cellspacing="0" cellpadding="0" style="TABLE-LAYOUT: fixed;">
+        <tr>
+            <td style="width:10%">@Html.DisplayNameFor(model => model.Log_date):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.Log_date)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Thread):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.Thread)
+
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Log_level):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.Log_level)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Logger):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.Logger)
+            </td>
+        </tr>
+        <tr style="height: 200px;">
+            <td>@Html.DisplayNameFor(model => model.Message):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.Message)
+            </td>
+
+        </tr>
+
+        <tr style="height:200px;">
+            <td style="width:5%">@Html.DisplayNameFor(model => model.Exception):</td>
+            <td style="text-align: left;vertical-align:top">
+                <p> @Html.DisplayFor(model => model.Exception)</p>
+            </td>
+        </tr>
+    </table>
+
+    <p>
+        @Html.ActionLink("返回列表", "Index")
+    </p>
+</div>

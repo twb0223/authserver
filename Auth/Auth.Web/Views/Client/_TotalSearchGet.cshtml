@@ -1,0 +1,149 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model Webdiyer.WebControls.Mvc.PagedList<Auth.Web.Controllers.OlEntity>
+@{
+    string str=string.Empty;
+    string str1 = string.Empty;
+}
+<script type="text/javascript">
+    //$(document).ready(function () {
+    //    $("#chkall").bind("click", function () {
+    //        $('input[name="chk_list"]').attr("checked", this.checked);
+    //    })
+    //    $('input[name="chk_list"]').click(function () {
+    //        $('#chkall').removeAttr("checked");
+    //    });
+    //    $('#btnbatCheckPass').click(function () {
+    //        $(this).attr('disabled', "true");
+    //        var ids = "";
+    //        var id;
+    //        $("input[name='chk_list']:checked").each(function () {
+    //            id = $(this).attr("title");
+    //            if (id != undefined && id != null) {
+    //                ids += id + "|";
+    //            }
+    //        });
+    //        if (ids == "") {
+    //            alert("请先勾选终端！");
+    //            $(this).removeAttr("disabled");
+    //        } else {
+    //            if (!confirm("确定审核通过选中设备?")) {
+    //                $(this).removeAttr("disabled");
+    //                return;
+    //            }
+    //            $.ajax({
+    //                type: "POST",
+    //                url: "Client/BatCheck",
+    //                datatype: JSON,
+    //                data: { cids: ids, flag: true },
+    //                success: function (data) {
+    //                    if (data.RepResults) {
+    //                        alert("批量验证成功！");
+    //                    }
+    //                    else {
+    //                        alert("批量验证失败，请查询日志！");
+    //                    }
+    //                    location.reload();
+    //                }
+    //            });
+    //        }
+    //    });
+
+    //    $('#btnbatCheckRefuse').click(function () {
+    //        $(this).attr('disabled', "true");
+    //        var ids = "";
+    //        var id;
+    //        $("input[name='chk_list']:checked").each(function () {
+    //            id = $(this).attr("title");
+    //            if (id != undefined && id != null) {
+    //                ids += id + "|";
+    //            }
+    //        });
+    //        if (ids == "") {
+    //            alert("请先勾选终端！"); $(this).removeAttr("disabled");
+    //        } else {
+    //            if (!confirm("确定删除选中设备?")) {
+    //                $(this).removeAttr("disabled");
+    //                return;
+    //            }
+    //            $.ajax({
+    //                type: "POST",
+    //                url: "Client/BatCheck",
+    //                datatype: JSON,
+    //                data: { cids: ids, flag: false },
+    //                success: function (data) {
+    //                    if (data.RepResults) {
+    //                        alert("批量删除成功！");
+    //                    }
+    //                    else {
+    //                        alert("批量删除失败，请查询日志！");
+    //                    }
+    //                    location.reload();
+    //                }
+    //            });
+    //        }
+    //    });
+    //})
+</script>
+
+<table class="tb tbbordertopleft list" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <th width="40%">
+            项目
+        </th>
+        <th width="40%">
+            部门
+        </th>
+        <th width="10%">
+            在线
+        </th>
+        <th width="10%">
+            离线
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr style="text-align:center">
+            <td>
+                @Html.DisplayFor(modelItem => item.Project)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartMent)
+            </td>
+            <td>
+                @if (item.Totalonline != null)
+                {
+                    str = item.Totalonline.ToString();
+                }
+                else
+                {
+                    str = "0";
+                }
+
+                @str
+            </td>
+            <td>
+                @if (item.Totaloffline != null)
+                {
+                    str1 = item.Totaloffline.ToString();
+                }
+                else
+                {
+                    str1 = "0";
+                }
+                @str1
+            </td>
+        </tr>
+    }
+</table>
+
+
+<div style="padding-top:5px; width:100%">
+    <div style="float:left">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
+    @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ShowPageIndexBox = true, PageIndexBoxType = PageIndexBoxType.DropDownList, ShowGoButton = false }, new MvcAjaxOptions { UpdateTargetId = "Total", DataFormId = "searchForm" }, new { style = "float:right" })
+</div>
+
+
+
+
+

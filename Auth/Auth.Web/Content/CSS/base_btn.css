@@ -1,0 +1,165 @@
+﻿@charset "utf-8";
+/* 按钮基本样式 */
+.btn {	
+	height:24px;
+	line-height:24px;
+	padding:0px 9px 0px 10px;
+	cursor:pointer;
+	background-color:#daf1ff;
+	border-bottom: 1px solid #75a7c7;
+	border-right: 1px solid #75a7c7;
+	display:block;
+	float:left;
+}
+.btn a {
+	height:24px;
+	line-height:24px;
+	padding-left:25px;
+	color:#245b94;
+	font-size:12px;
+	font-family:'微软雅黑','宋体','';
+}
+.btn a:hover{
+	color:#245b94;
+	text-decoration:none;
+}
+
+/* 个性化按钮样式 */
+.btn_confirm {
+	background: url("../images/png/btn_confirm.png") no-repeat scroll left center transparent;
+}
+.btn_cancel {
+	background: url("../images/png/btn_cancel.png") no-repeat scroll left center transparent;
+}
+.btn_query {
+	background: url("../images/png/btn_query.png") no-repeat scroll left center transparent;
+}
+.btn_empty {
+	background: url("../images/png/btn_empty.png") no-repeat scroll left center transparent;
+}
+.btn_empty1 {
+	background: url("../images/png/btn_empty.png") no-repeat scroll left center transparent;
+}
+.btn_export {
+	background: url("../images/png/btn_export.png") no-repeat scroll left center transparent;
+}
+.btn_save {
+	background: url("../images/png/btn_save.png") no-repeat scroll left center transparent;
+}
+
+/* 个性化图文样式 */
+.oper span {
+	margin-right:5px;
+	padding-bottom:1px;
+	padding-left:20px;
+}
+
+ span a.nextoper
+{
+    color:#F70000;
+}
+
+.oper_view {
+	background:url("../images/png/btn_view.png") no-repeat left center;
+}
+.oper_modify {
+	background:url("../images/png/btn_modify.png") no-repeat left center;
+}
+.oper_add {
+	background:url("../images/png/btn_add.png") no-repeat left center;
+}
+.oper_open {
+	background:url("../images/png/btn_view.gif") no-repeat left center;
+}
+.oper_del {
+	background:url("../images/png/btn_delete.png") no-repeat left center;
+}
+.oper_download {
+	background:url("../images/xiazai.gif") no-repeat left center;
+}
+.oper_handle {
+	background:url("../images/png/btn_export.png") no-repeat left center;
+}
+.oper_submit {
+	background:url("../images/png/btn_submit.png") no-repeat left center;
+}
+.oper_cancel {
+	background:url("../images/png/btn_empty.png") no-repeat left center;
+}
+.oper_backward {
+	background:url("../images/png/btn_backward.png") no-repeat left center;
+}
+
+.oper_handle_no {
+	background:url("../images/png/btn_export_no.png") no-repeat left center;
+}
+.oper_poweron {
+	background:url("../images/png/btn_poweron.png") no-repeat left center;
+}
+.oper_poweroff {
+	background:url("../images/png/btn_poweroff.png") no-repeat left center;
+}
+.oper_restart {
+	background:url("../images/png/btn_restart.png") no-repeat left center;
+}
+.oper_play {
+	background:url("../images/png/btn_play.png") no-repeat left center;
+}
+.oper_pause {
+	background:url("../images/png/btn_pause.png") no-repeat left center;
+}
+.oper_stop {
+	background:url("../images/png/btn_stop.png") no-repeat left center;
+}
+.oper_schedule {
+	background:url("../images/png/btn_schedule.png") no-repeat left center;
+}
+.oper_device {
+	background:url("../images/png/btn_device.png") no-repeat left center;
+}
+.oper_plan {
+	background:url("../images/png/btn_plan.png") no-repeat left center;
+}
+.oper_log {
+	background:url("../images/png/btn_log.png") no-repeat left center;
+}
+.oper_refresh {
+	background:url("../images/png/btn_refresh.png") no-repeat left center;
+}
+.oper_screen {
+	background:url("../images/gif/btn_screen.gif") no-repeat left center;
+}
+
+.oper_make {
+	background:url("../images/png/btn_choose.png") no-repeat left center;
+}
+
+.tree_up {
+	width:30px;
+	cursor:pointer;
+	background:url(../images/ico/control_play_blue.png) no-repeat center center;
+}
+
+.tree_down {
+	width:30px;
+	cursor:pointer;
+	background:url(../images/ico/control_play.png) no-repeat center center;
+}
+.tree_none {
+	width:30px;
+	cursor:pointer;
+	background:url(../images/ico/control_none.png) no-repeat center center;
+}
+
+.search{ width:100%; height:40px; border:2px #9dc6e0 solid; margin-bottom:5px; overflow:hidden;}
+.span01, .span02, .span03{ float:left; line-height:40px; font-size:16px; margin-left:20px;}
+#Btn02{ width:50px; height:30px; margin-left:5px; margin-top:5px;}
+.search a{ text-decoration:underline; line-height:30px; font-size:16px; margin-left:5px; margin-top:10px;}
+
+.selectbtn{ float:left; width:110px; }
+#selectnow{ width:100px; line-height:40px; color:black; font-size:14px; height:30px; margin-top:5px;}
+#StartDate{ width:120px; height:26px; float:left; margin-top:5px;}
+#EndDate{ width:120px; height:26px; float:left; margin-top:5px;}
+#input03{ width:60px; height:30px; margin-top:5px; margin-left:10px;}
+
+	

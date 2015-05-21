@@ -1,0 +1,100 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model Webdiyer.WebControls.Mvc.PagedList<Auth.Model.ClientInfo>
+@{
+    var status = @Request.QueryString["ClientStatus"];
+    var olstatus = "";
+}
+<table class="tb tbbordertopleft list" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <th width="10%">
+            设备编号
+        </th>
+        <th>
+            终端名称
+        </th>
+        <th width="5%">
+            点位
+        </th>
+        <th width="7%">
+            终端类型
+        </th>
+
+        <th width="7%">
+            终端状态
+        </th>
+
+        <th width="7%">
+            在线状态
+        </th>
+        <th width="25%">操作</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr style="text-align:center">
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientDeviceID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Point)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientType)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientStatus)
+            </td>
+
+            <td>
+
+                @if (item.OnlineStatus == "1")
+                {
+                    olstatus = "在线";
+                }
+                else
+                {
+                    olstatus = "离线";
+                }
+                @olstatus
+
+            </td>
+            @if (item.ClientStatus != "异常")
+            {
+                <td>
+
+                    @Html.ActionLink("重启", "Command", new { id = item.ClientID, flag = "reboot" })
+                    @Html.ActionLink("关机", "Command", new { id = item.ClientID, flag = "turndown" })
+                    @Html.ActionLink("休眠", "Command", new { id = item.ClientID, flag = "sleep" })
+                    @Html.ActionLink("唤醒", "Command", new { id = item.ClientID, flag = "wakeup" })
+                    @Html.ActionLink("日志上传", "Command", new { id = item.ClientID, flag = "upload" })
+                    @Html.ActionLink("明细", "Details", new { id = item.ClientID })
+
+                    @Html.ActionLink("定时开关机", "Command", new { id = item.ClientID, flag = "shutdown" })
+
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.ActionLink("明细", "Details", new { id = item.ClientID })
+                </td>
+            }
+
+        </tr>
+    }
+</table>
+
+
+<div style="padding-top:5px; width:100%">
+    <div style="float:left">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
+    @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ShowPageIndexBox = true, PageIndexBoxType = PageIndexBoxType.DropDownList, ShowGoButton = false }, new MvcAjaxOptions { UpdateTargetId = "client", DataFormId = "searchForm" }, new { style = "float:right" })
+</div>
+
+
+
+
+

@@ -1,0 +1,144 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model Webdiyer.WebControls.Mvc.PagedList<Auth.Model.LogInfo>
+@{
+    ViewBag.Title = "日志管理";
+}
+<script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnclear").bind("click", function () {
+            $("#Log_level").val("");
+            $("#StartDate").val("");
+            $("#EndDate").val("");
+            $("#searchForm").submit();
+        });
+
+        $("#btnserach").bind("click", function () {
+            if (!checkEndTime()) {
+                alert("记录时间(止)必须晚于记录时间(起)！");
+                return;
+            }
+            else {
+                $("#searchForm").submit();
+            }
+        });
+
+        //$("#hide").toggle(function () {
+        //    $("#Searchcontent").hide();
+        //},
+        //    function () {
+        //        $("#Searchcontent").show();
+        //    }
+        //);
+
+    });
+
+    function checkEndTime() {
+        var startTime = $("#StartDate").val();
+        var start = new Date(startTime.replace("-", "/").replace("-", "/"));
+        var endTime = $("#EndDate").val();
+        var end = new Date(endTime.replace("-", "/").replace("-", "/"));
+        if (end < start) {
+            return false;
+        }
+        return true;
+    }
+
+</script>
+
+<div class="topinformationbox">
+    <a>日志管理</a>
+
+</div>
+
+<div class="page">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td>
+                    <table class="tbsearch" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td id="hide">
+                                    <span>
+                                    </span>查询条件
+                               
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="tbcontent" id="Searchcontent">
+                        @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "log", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" } }))
+                        {
+                            <table class="tb tbbordertopleft" cellpadding="0" cellspacing="0" width="100%" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td width="5%" class="label">
+                                            日志级别
+                                        </td>
+                                        <td width="15%">
+                                            <div class="select_border" style="width:99%;height:22px">
+                                                <select name="Log_level" id="Log_level" style="width:100%">
+                                                    <option value="">全部</option>
+                                                    <option value="INFO">信息</option>
+                                                    <option value="DEBUG">调试</option>
+                                                    <option value="WARN">警告</option>
+                                                    <option value="ERROR">错误</option>
+                                                    <option value="FATAL">致命</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td width="5%" class="label">
+                                            记录时间(起)
+                                        </td>
+                                        <td width="15%">
+                                            <input id="StartDate" name="StartDate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy/MM/dd HH:mm:ss' })" style="width:99%;height:22px" />
+
+                                        </td>
+                                        <td width="5%" class="label">
+                                            记录时间(止)
+                                        </td>
+                                        <td width="15%">
+                                            <input id="EndDate" name="EndDate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy/MM/dd HH:mm:ss' })" style="width:99%;height:22px" />
+                                        </td>
+
+                                    </tr>
+
+                                    <tr height="40">
+                                        <td colspan="6">
+                                            <div class="tbbtn center">
+                                                <input type="button" value="查询" id="btnserach" style="width:65px; height:25px" />
+                                                <input type="button" value="清空" id="btnclear" style="width:65px; height:25px" />
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        }
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+    <div style="height: 20px;">
+    </div>
+    <div id="log" align="center">
+        @Html.Partial("_LogSearchGet", Model)
+    </div>
+</div>
+
+
+@section Scripts
+{@{Html.RegisterMvcPagerScriptResource();}
+<script type="text/javascript" src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>}
+
+

@@ -1,0 +1,72 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model Webdiyer.WebControls.Mvc.PagedList<Auth.Model.PointInfo>
+@{
+    ViewBag.Title = "显示点位";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+     
+        $("div.nav").hide();
+        $("#chkall").bind("click", function () {
+            $('input[name="chk_list"]').attr("checked", this.checked);
+       
+        })
+        $('input[name="chk_list"]').click(function () {
+            $('#chkall').removeAttr("checked");
+        });
+
+        $("#btnOK").bind("click",function () {
+            var ids = "";
+            var id;
+            $("input[name='chk_list']:checked").each(function () {
+                id = $(this).attr("title");
+                if (id != undefined && id != null) {
+                    ids += id + "|";
+                }
+            });
+            if (ids == "") {
+                alert("请勾选点位");
+            } else {
+                ids = ids.substring(0, ids.length - 1);
+                window.returnValue = ids;
+                window.close();
+            }
+        });
+    });
+</script>
+<table style="text-align:center" class="tb tbbordertopleft" width="70%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <th width="5%" style="text-align:center">
+            <input type="checkbox" id="chkall" value=" " />
+        </th>
+        <th>
+            点位编号
+        </th>
+        <th>
+            点位名称
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align:center"><input type="checkbox" name="chk_list" value=" " title=@item.PointNo style="text-align:center" /></td>
+            <td>
+                @Html.DisplayFor(modeitem => item.PointNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modeitem => item.PointName)
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="3" style="text-align:left">
+            <input type="button" value="确定" id="btnOK" style="width:65px; height:25px" />
+        </td>
+    </tr>
+
+</table>
+
+<div style="padding-top:5px;">
+    <div style="float:left;width:50%">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
+    @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ShowPageIndexBox = true, PageIndexBoxType = PageIndexBoxType.DropDownList, ShowGoButton = false }, new MvcAjaxOptions { UpdateTargetId = "Sta", DataFormId = "searchForm" }, new { style = "float:right" })
+</div>

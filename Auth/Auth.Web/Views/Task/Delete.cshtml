@@ -1,0 +1,54 @@
+﻿@model Auth.Model.UpdateTask
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>UpdateTask</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VersionID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VersionID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VersionNo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VersionNo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateScope)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateScope)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateTime)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - 认证服务系统</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")" ></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui-1.8.24.min.js")"></script>
+   
+    <link href="~/Content/CSS/style.css" rel="stylesheet" />
+    <link href="~/Content/CSS/base.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <img class="topbackground" src="/Content/images/topbackground.png">
+            <div class="toptext"><a href="/Home/Index" style="text-decoration: none;">数字媒体服务认证平台</a></div>
+            <div class="abox">
+                <a href="/Home/Index" class="a01">返回首页</a>
+                <a href="/Client/Index" class="a01">认证记录</a>
+                <a href="/Version/Index" class="a02">版本管理</a>
+                <a href="/Task/Index" class="a03">更新计划</a>
+                <a href="/Log/Index" class="a04">日志管理</a>
+            </div>
+        </div>
+
+
+        @RenderSection("featured", required: false)
+        <section>
+            @RenderBody()
+        </section>
+        </div>
+        @RenderSection("scripts", required: false)
+</body>
+</html>

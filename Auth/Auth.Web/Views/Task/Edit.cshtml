@@ -1,0 +1,70 @@
+﻿@model Auth.Model.UpdateTask
+
+@{
+    ViewBag.Title = "编辑";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>编辑升级计划</legend>
+
+        @Html.HiddenFor(model => model.TaskID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VersionID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VersionID)
+            @Html.ValidationMessageFor(model => model.VersionID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VersionNo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VersionNo)
+            @Html.ValidationMessageFor(model => model.VersionNo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UpdateType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UpdateType)
+            @Html.ValidationMessageFor(model => model.UpdateType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UpdateScope)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UpdateScope)
+            @Html.ValidationMessageFor(model => model.UpdateScope)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UpdateTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UpdateTime)
+            @Html.ValidationMessageFor(model => model.UpdateTime)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

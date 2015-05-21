@@ -1,0 +1,118 @@
+﻿@model Auth.Model.ClientInfo
+
+@{
+    ViewBag.Title = "认证记录明细";
+    var str = "";
+}
+
+<div class="topinformationbox">
+    <a>认证记录明细</a>
+
+</div>
+
+<div style="height: 5px;">
+</div>
+
+<div align="center">
+    <table class="tb tbbordertopleft" width="100%" border="0" cellspacing="0" cellpadding="0">
+
+        <tr>
+            <td style="width:10%">@Html.DisplayNameFor(model => model.ClientName):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.ClientName)
+            </td>
+
+            <td style="width:10%">@Html.DisplayNameFor(model => model.ClientType):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.ClientType)
+            </td>
+
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.ClientCpu):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.ClientCpu)
+            </td>
+            <td>@Html.DisplayNameFor(model => model.ClientMAC):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.ClientMAC)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.ClientMemory):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.ClientMemory)
+            </td>
+
+            <td>@Html.DisplayNameFor(model => model.ClientWifiMAC):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.ClientWifiMAC)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.ClientIP):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.ClientIP)
+            </td>
+
+            <td>@Html.DisplayNameFor(model => model.Point):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.Point)
+            </td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Project):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.Project)
+            </td>
+            <td>@Html.DisplayNameFor(model => model.Department):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.Department)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.ClientStatus):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.ClientStatus)
+            </td>
+            <td>@Html.DisplayNameFor(model => model.OnlineStatus):</td>
+            <td style="text-align: left">
+                @if (this.Model.OnlineStatus == "1")
+                {
+                    str = "在线";
+                }
+                else
+                {
+                    str = "离线";
+                }
+             @str
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.LastHitTime):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.LastHitTime)
+            </td>
+            <td>@Html.DisplayNameFor(model => model.ClientInitDate):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.ClientInitDate)
+            </td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.ClientChangeFlag):</td>
+            <td style="text-align: left">
+                @Html.DisplayFor(model => model.ClientChangeFlag)
+            </td>
+            <td></td>
+            <td style="text-align: left">
+              
+            </td>
+        </tr>
+    </table>
+    <p>
+        @Html.ActionLink("返回列表", "Index")
+    </p>
+
+</div>

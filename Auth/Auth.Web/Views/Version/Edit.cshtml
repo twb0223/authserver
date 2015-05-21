@@ -1,0 +1,104 @@
+﻿@model Auth.Model.VersionInfo
+@using Auth.Web
+@{
+    ViewBag.Title = "编辑";
+    Utils fun = new Utils();
+}
+
+<h2>编辑</h2>
+
+@using (Html.BeginForm("Edit", "Version", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.VersionID)
+    @Html.HiddenFor(model => model.MD5)
+
+    <fieldset>
+        <legend>版本信息</legend>
+
+        <table class="gridtable" style="text-align:left">
+            <tr>
+                <td>@Html.LabelFor(model => model.Name)</td>
+                <td>
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </td>
+
+                <td>@Html.LabelFor(model => model.VersionNo)</td>
+                <td>
+                    @Html.DisplayFor(model => model.VersionNo)
+                    @Html.ValidationMessageFor(model => model.VersionNo)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.IsPublish)</td>
+                <td>
+                    @Html.DropDownListFor(model => model.IsPublish, fun.Selectlists("ispub"), "请选择..")
+                    @Html.ValidationMessageFor(model => model.IsPublish)
+                </td>
+
+                <td>@Html.LabelFor(model => model.ClientType)</td>
+                <td>
+                    @Html.EditorFor(model => model.ClientType)
+                    @Html.ValidationMessageFor(model => model.ClientType)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.FielPath)</td>
+                <td>
+                    <input type="file" name="FielPath" id="FielPath" />
+                    现有文件： @Html.DisplayFor(model => model.FielPath)
+                    @Html.ValidationMessageFor(model => model.FielPath)
+                </td>
+                <td>@Html.LabelFor(model => model.ClientTypeName)</td>
+                <td>
+                    @Html.EditorFor(model => model.ClientTypeName)
+                    @Html.ValidationMessageFor(model => model.ClientTypeName)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.CreatBy)</td>
+                <td>
+                    @Html.EditorFor(model => model.CreatBy)
+                    @Html.ValidationMessageFor(model => model.CreatBy)
+                </td>
+                <td>@Html.LabelFor(model => model.CreatAt)</td>
+                <td>
+                    @Html.EditorFor(model => model.CreatAt)
+                    @Html.ValidationMessageFor(model => model.CreatAt)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.UpdateBy)</td>
+                <td>
+                    @Html.EditorFor(model => model.UpdateBy)
+                    @Html.ValidationMessageFor(model => model.UpdateBy)
+                </td>
+                <td>@Html.LabelFor(model => model.UpdateAt)</td>
+                <td>
+                    @Html.EditorFor(model => model.UpdateAt)
+                    @Html.ValidationMessageFor(model => model.UpdateAt)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.Description)</td>
+                <td colspan="4">
+                    @Html.EditorFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </td>
+            </tr>
+        </table>
+        <p>
+            <input type="submit" value="保存" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("返回列表", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,139 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model Webdiyer.WebControls.Mvc.PagedList<Auth.Model.UpdateTask>
+@using Auth.Web
+@{
+    ViewBag.Title = "更新计划";
+    Utils fun = new Utils();
+}
+<script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnclear").bind("click", function () {
+            $("#VersionNo").val("");
+            $("#StartDate").val("");
+            $("#EndDate").val("");
+            $("#searchForm").submit();
+        });
+
+        $("#btnserach").bind("click", function () {
+            if (!checkEndTime()) {
+                alert("更新时间(止)必须晚于更新时间(起)！");
+                return;
+            }
+            else {
+                $("#searchForm").submit();
+            }
+        });
+
+//        $("#hide").toggle(function () {
+//            $("#Searchcontent").hide();
+//        },
+//    function () {
+//        $("#Searchcontent").show();
+//    }
+//);
+
+    });
+
+    function checkEndTime() {
+        var startTime = $("#StartDate").val();
+        var start = new Date(startTime.replace("-", "/").replace("-", "/"));
+        var endTime = $("#EndDate").val();
+        var end = new Date(endTime.replace("-", "/").replace("-", "/"));
+        if (end < start) {
+            return false;
+        }
+        return true;
+    }
+
+</script>
+<div class="topinformationbox">
+    <a>更新计划列表</a>
+
+</div>
+<div class="page">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td>
+                    <table class="tbsearch" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td id="hide">
+                                    <span>
+                                    </span>查询条件
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="tbcontent" id="Searchcontent">
+                        @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "task", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" } }))
+                        {
+                            <table class="tb tbbordertopleft" cellpadding="0" cellspacing="0" width="100%" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td width="5%" class="label">
+                                            版本号
+                                        </td>
+                                        <td width="15%">
+                                            <input type="text" name="VersionNo" id="VersionNo" style="width:99%;height:22px" />
+
+                                        </td>
+
+                                        <td width="5%" class="label">
+                                            更新时间(起)
+                                        </td>
+                                        <td width="15%">
+                                            <input id="StartDate" name="StartDate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy/MM/dd HH:mm:ss' })" style="width:99%;height:22px" />
+
+                                        </td>
+                                        <td width="5%" class="label">
+                                            更新时间(止)
+                                        </td>
+                                        <td width="15%">
+                                            <input id="EndDate" name="EndDate" type="text" onclick="WdatePicker({ dateFmt: 'yyyy/MM/dd HH:mm:ss' })" style="width:99%;height:22px" />
+                                        </td>
+                                    </tr>
+                                    <tr height="40">
+                                        <td colspan="6">
+                                            <div class="tbbtn center">
+                                                <input type="button" value="查询" id="btnserach" style="width:65px; height:25px" />
+                                                <input type="button" value="清空" id="btnclear" style="width:65px; height:25px" />
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        }
+                    </div>
+                </td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+    <div style="height: 20px;">
+    </div>
+
+
+    <div id="task">
+        @Html.Partial("_TaskSearchGet", Model)
+    </div>
+</div>
+
+
+
+
+@section Scripts
+{@{Html.RegisterMvcPagerScriptResource();}
+<script type="text/javascript" src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>}
+
+

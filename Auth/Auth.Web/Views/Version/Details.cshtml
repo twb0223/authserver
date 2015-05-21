@@ -1,0 +1,100 @@
+﻿@model Auth.Model.VersionInfo
+@using Auth.Web
+@{
+    ViewBag.Title = "版本明细";
+    var str = "";
+    Utils fun = new Utils();
+}
+
+<div class="topinformationbox">
+    <a>认证记录明细</a>
+
+</div>
+
+
+<div style="height: 5px;">
+</div>
+
+<div align="center">
+    <table class="tb tbbordertopleft" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td style="width:10%">@Html.DisplayNameFor(model => model.Name)</td>
+            <td style="width:40%">
+                @Html.DisplayFor(model => model.Name)
+            </td>
+            <td style="width:10%">@Html.DisplayNameFor(model => model.VersionNo)</td>
+            <td style ="width:40%">
+                @Html.DisplayFor(model => model.VersionNo)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.ClientType)</td>
+            <td>
+                <div class="select_border" style="width:131px">
+                    @Html.DropDownListFor(model => model.ClientType, fun.Selectlists("ctype"), "请选择..", new { disabled = "disabled", Style = "width:100%" })
+                    </div>
+</td>
+            <td>@Html.DisplayNameFor(model => model.ClientTypeName)</td>
+            <td>
+                @Html.DisplayFor(model => model.ClientTypeName)
+            </td>
+        </tr>
+        @*<tr>
+                <td>@Html.DisplayNameFor(model => model.CreatBy)</td>
+                <td>
+                    @Html.DisplayFor(model => model.CreatBy)
+                </td>
+                <td>@Html.DisplayNameFor(model => model.CreatAt)</td>
+                <td>
+                    @Html.DisplayFor(model => model.CreatAt)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.UpdateBy)</td>
+                <td>
+                    @Html.DisplayFor(model => model.UpdateBy)
+                </td>
+
+                <td>@Html.DisplayNameFor(model => model.UpdateAt)</td>
+                <td>
+                    @Html.DisplayFor(model => model.UpdateAt)
+                </td>
+            </tr>*@
+
+        <tr>
+            <td >@Html.DisplayNameFor(model => model.FielPath)</td>
+            <td>
+                @Html.DisplayFor(model => model.FielPath)
+            </td>
+            <td>@Html.DisplayNameFor(model => model.MD5)</td>
+            <td>
+                @Html.DisplayFor(model => model.MD5)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.IsPublish)</td>
+            <td>
+                @if (this.Model.IsPublish == 1)
+                {
+                    str = "是";
+                }
+                else
+                {
+                    str = "否";
+                }
+                @str
+            </td>
+
+            <td>@Html.DisplayNameFor(model => model.Description)</td>
+            <td>
+                @Html.DisplayFor(model => model.Description)
+            </td>
+
+        </tr>
+    </table>
+    <p>
+        @*@Html.ActionLink("编辑", "Edit", new { id = Model.VersionID }) |*@
+        @Html.ActionLink("返回列表", "Index")
+    </p>
+
+    </div>

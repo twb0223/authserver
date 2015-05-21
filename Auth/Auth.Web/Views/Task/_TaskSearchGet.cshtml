@@ -1,0 +1,93 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model Webdiyer.WebControls.Mvc.PagedList<Auth.Model.UpdateTask>
+@using Auth.Web
+@{
+    var str = "";
+    Utils fun = new Utils();
+}
+
+
+
+<table class="tb tbbordertopleft list" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+        <tr>
+            <td class="label" width="5%">
+                操作
+            </td>
+            <td class="oper" align="left">
+                <span id="btn_Add" class="oper_add">
+                    @Html.ActionLink("添加", "Create")
+                </span>
+
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="height: 5px;">
+</div>
+
+<table class="tb tbbordertopleft" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskID)
+        </th>
+        <th>
+           组件_版本号
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateScope)
+        </th>
+        <th style="width:10%">操作</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+          <tr style="text-align:center">
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VersionNo)
+            </td>
+            <td>
+                @fun.GetName("utp", item.UpdateType)
+            </td>
+            <td>
+                @if (item.IsExecNow == 1)
+                {
+                    str = "立即更新";
+                }
+                else
+                {
+                    str = item.UpdateTime.ToString();
+                }
+                @str
+            </td>
+            <td>
+                @fun.GetName("scop", item.UpdateScope)
+            </td>
+            <td>
+                @Html.ActionLink("明细", "Details", new { id = item.TaskID })
+                @Html.ActionLink("删除", "Delete", new { id = item.TaskID }, new { onclick = "return (confirm('确定要删除吗？'))" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div style="padding-top:5px; width:100%">
+    <div style="float:left">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
+    @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ShowPageIndexBox = true, PageIndexBoxType = PageIndexBoxType.DropDownList, ShowGoButton = false }, new MvcAjaxOptions { UpdateTargetId = "task", DataFormId = "searchForm" }, new { style = "float:right" })
+</div>
+
+
+
+
+

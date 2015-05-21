@@ -1,0 +1,90 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model Webdiyer.WebControls.Mvc.PagedList<Auth.Model.LogInfo>
+@{
+    string str = string.Empty;
+}
+<table class="tb tbbordertopleft list" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <th width="5%">
+            编号
+        </th>
+        <th width="15%">
+            时间
+        </th>
+
+        <th style="width:5%">
+            级别
+        </th>
+
+        <th>
+            信息
+        </th>
+
+        <th width="5%">操作</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr style="text-align:center">
+            <td>
+                @Html.DisplayFor(modelItem => item.LogID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Log_date)
+            </td>
+
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Log_level)*@
+                @switch (item.Log_level)
+                {
+                    case "INFO":
+                        str = "信息";
+                        break;
+
+                    case "FATAL":
+                        str = "致命";
+                        break;
+
+                    case "DEBUG":
+                        str = "调试";
+                        break;
+
+                    case "WARN":
+                        str = "警告";
+                        break;
+                    case "ERROR":
+                        str = "错误";
+                        break;
+                    default:
+                        break;
+                }
+                @str
+            </td>
+
+            <td style="text-align:left">
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.ActionLink("明细", "Details", new { id = item.LogID })
+
+            </td>
+        </tr>
+    }
+    <tr>
+
+        <td colspan="5" style="text-align:right">
+
+            @Html.ActionLink("备份", "Export")
+            @Html.ActionLink("清空", "Clean", "", new { onclick = "return confirm('请确保清空前已备份！是否继续？')" })
+        </td>
+    </tr>
+</table>
+
+<div style="padding-top:5px; width:100%">
+    <div style="float:left">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
+    @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ShowPageIndexBox = true, PageIndexBoxType = PageIndexBoxType.DropDownList, ShowGoButton = false }, new MvcAjaxOptions { UpdateTargetId = "log", DataFormId = "searchForm" }, new { style = "float:right" })
+</div>
+
+
+
+

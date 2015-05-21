@@ -1,0 +1,159 @@
+﻿@model Auth.Model.UpdateTask
+@using Auth.Web;
+@{
+    ViewBag.Title = "更新计划";
+    Utils fun = new Utils();
+}
+<script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#TaskName").css("width", "99%").css("height", "22px");
+        $("#VersionNo").css("width", "99%").css("height", "22px");
+        $("#Description").css("width", "99%").css("height", "22px");
+        $("#btnPoint").bind("click", function () {
+            var scope = $("#UpdateScope option:selected").val();
+            if (scope == "1") {
+                var ids = window.showModalDialog('/Task/ShowPro', '', 'dialogWidth:920px;dialogHeight:580px;resizable:no;status:no;scroll:no;help:no;unadorned:yes;');
+                $("#IDList").val(ids);
+
+            }
+            if (scope == "2") {
+                var ids = window.showModalDialog('/Task/ShowDep', '', 'dialogWidth:920px;dialogHeight:580px;resizable:no;status:no;scroll:no;help:no;unadorned:yes;');
+                $("#IDList").val(ids);
+            }
+            if (scope == "3") {
+                var ids = window.showModalDialog('/Task/ShowStation', '', 'dialogWidth:920px;dialogHeight:580px;resizable:no;status:no;scroll:no;help:no;unadorned:yes;');
+                $("#IDList").val(ids);
+            }
+        });
+        $("#IsExecNow").bind("change", function () {
+            var f = $("#IsExecNow").val();
+            if (f == "1") {
+                $("#UpdateTime").attr("disabled", "disabled");
+
+                $("#UpdateTime").val("");
+            }
+            else {
+                $("#UpdateTime").removeAttr("disabled");
+            }
+        });
+        $("#VersionID").bind("change", function () {
+            var vno = $("#VersionID option:selected").text();
+            $("#VersionNo").val(vno);
+        });
+
+        $("#UpdateScope").bind("change", function () {
+          
+            $("#IDList").val("");
+        });
+
+        $("#btnadd").bind("click", function () {
+            var f = $("#IsExecNow").val();
+            var dt = $("#UpdateTime").val();
+
+            if ($("#VersionID").val() == "") {
+                alert("请选择组件_版本号");
+                return;
+            }
+
+            if ($("#UpdateType").val() == "") {
+                alert("请选择更新方式");
+                return;
+            }
+            if ($("#UpdateScope").val() == "") {
+                alert("请选择更新范围");
+                return;
+            }
+            if (f == "0" && dt == "") {
+                alert("请填写更新时间");
+                return;
+            }
+            $("#subForm").submit();
+            $("#btnadd").attr("disabled", "disabled");
+        });
+
+    });
+
+</script>
+
+<div class="topinformationbox">
+    <a>计划添加</a>
+</div>
+<div style="height: 5px;">
+</div>
+<div align="center">
+    @using (Html.BeginForm("Create", "Task", FormMethod.Post, new { id = "subForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        <table class="tb tbbordertopleft list" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="width:10%">@Html.LabelFor(model => model.TaskName)</td>
+                <td>
+                    @Html.EditorFor(model => model.TaskName)
+
+
+                </td>
+
+                <td style="width:10%">组件_版本号</td>
+                <td>
+                    <div class="select_border" style="width: 99%;text-align:left">
+                        @Html.DropDownListFor(model => model.VersionID, fun.Selectlists("version"), "请选择..", new { Style = "width:100%" })
+                    </div>
+
+                    <input type="hidden" name="VersionNo" id="VersionNo" />
+
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.UpdateType)</td>
+                <td>
+                    <div class="select_border" style="width: 99%; text-align: left">
+                        @Html.DropDownListFor(model => model.UpdateType, fun.Selectlists("utp"), "请选择..", new { Style = "width:100%" })
+                    </div>
+
+                </td>
+                <td>@Html.LabelFor(model => model.UpdateScope)</td>
+                <td>
+                    <div class="select_border" style="width: 99%; text-align: left">
+                        @Html.DropDownListFor(model => model.UpdateScope, fun.Selectlists("scop"), "请选择..", new { Style = "width:100%" })
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.IsExecNow)</td>
+                <td>
+                    <div class="select_border" style="width: 99%; text-align: left">
+                        <select style="width:100%" name="IsExecNow" id="IsExecNow">
+                            <option value=1>是</option>
+                            <option value=0 selected="selected">否</option>
+                        </select>
+                    </div>
+                </td>
+                <td>@Html.LabelFor(model => model.UpdateTime)</td>
+                <td>
+                    <input id="UpdateTime" name="UpdateTime" type="text" style="width:99%;height:22px;" onclick="WdatePicker({ dateFmt: 'yyyy/MM/dd HH:mm:ss' })" />
+
+                </td>
+            </tr>
+            <tr>
+                <td>更新范围集合</td>
+                <td colspan="3">
+                    <input type="button" value="选择" id="btnPoint" style="width:60px; height:22px;" />
+                    <input type="text" name="IDList" id="IDList" readonly="readonly" style="width:94%;height:22px;" />
+                </td>
+            </tr>
+        </table>
+        <div style="height: 5px;">
+        </div>
+        <div style=" text-align:center">
+            <input type="button" value="添加" id="btnadd" style="width:65px; height:25px" />
+            <a href="/Task/Index">返回列表</a>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

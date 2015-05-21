@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "首页";
+}
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {  
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetErrorClient",
+            datatype: JSON,
+            success: function (data) {
+                $("#error").append(data);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetTask",
+            datatype: JSON,
+            success: function (data) {
+                $("#task").append(data);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/Getoffline",
+            datatype: JSON,
+            success: function (data) {
+                $("#online").append(data);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetLogs",
+            datatype: JSON,
+            success: function (data) {
+                $("#logs").append(data);
+            }
+        });
+
+    });
+    function myrefresh() {
+        window.location.reload();
+    }
+    setTimeout('myrefresh()', 120000); //指定1秒刷新一次
+</script>
+
+<div class="topinformationbox">
+    <a>首页</a>
+
+</div>
+
+<div class="coloumbg" style="font-family:Arial;">
+    <img class="coloumpicture" src="/Content/images/bg02.png">
+    <div class="Box01">
+        <a href="/Client/Index"><img src="/Content/images/pt.png"></a>
+        <div class="Linebox01" id="error">
+           
+        </div>
+    </div>
+    <div class="Box02">
+        <a href="/Client/Total"><img src="/Content/images/version.png"></a>
+        <div class="Linebox02" id="online">
+            </div>
+        </div>
+    <div class="Box03">
+        <a href="/Task/Index"><img src="/Content/images/setting.png"></a>
+        <div class="Linebox03" id="task">
+        </div>
+    </div>
+    <div class="Box04">
+        <a href="/Log/Index"><img src="/Content/images/log.png"></a>
+        <div class="Linebox04" id="logs">
+
+        </div>
+    </div>
+    <div>
+        <img src="/Content/images/bottom.jpg">
+    </div>
+</div>
